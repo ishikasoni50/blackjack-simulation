@@ -1,6 +1,4 @@
 
-
-# DON'T CHANGE OR REMOVE THIS IMPORT
 from random import shuffle
 
 # DON'T CHANGE OR REMOVE THESE LISTS
@@ -133,8 +131,49 @@ class Blackjack():
 
             if (count == len(self.players)):
                 loop = False
-                
-            
+
+        #winner and tie loop
+        highestHand = []
+        for h in self.players:
+                if h.value() <= 21:
+                    highestHand.append(h.value())
+
+    
+        count = 0
+        for w in self.players:
+            if w.value() <= 21:
+                if not w.value() < max(highestHand):
+                    count+=1
+                    name = w.name
+
+        if count == 1:
+            print("The winner is " + name + ".")
+        else:
+            print("There is a tie.")
+
+        #tie loop
+        tie = []
+        for t in self.players:
+            tie.append(t.value())
+
+        count = 0
+        for d in self.players:
+            if d.value() == tie[0]:
+                count += 1
+
+        if count == len(self.players):
+            print("There was a tie.")
+        
+
+        #no winner loop
+        count = 0
+        for f in self.players:
+            if f.value() > 21:
+                count += 1
+
+        if (count == len(self.players)):
+            print("There is no winner.")
+
         pass
                 
                 
@@ -204,4 +243,6 @@ if __name__ == "__main__":
     print(game)
     game.play_game()
     print(game)
+
+
 
